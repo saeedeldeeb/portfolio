@@ -73,7 +73,6 @@ body {
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
   letter-spacing: -0.5px;
 }
 
@@ -215,15 +214,7 @@ body {
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
   animation: shimmer 3s ease-in-out infinite;
-}
-
-@supports not (background-clip: text) {
-  .name-highlight {
-    color: var(--accent-cyan);
-    -webkit-text-fill-color: var(--accent-cyan);
-  }
 }
 
 @keyframes shimmer {
@@ -406,7 +397,6 @@ section {
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .title-text {
