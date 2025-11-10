@@ -69,6 +69,7 @@ body {
 .nav-logo {
   font-size: 1.5rem;
   font-weight: 700;
+  color: var(--accent-cyan);
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   background-clip: text;
@@ -210,11 +211,19 @@ body {
 
 .name-highlight {
   display: block;
+  color: var(--accent-cyan);
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shimmer 3s ease-in-out infinite;
+}
+
+@supports not (background-clip: text) {
+  .name-highlight {
+    color: var(--accent-cyan);
+    -webkit-text-fill-color: var(--accent-cyan);
+  }
 }
 
 @keyframes shimmer {
@@ -393,6 +402,7 @@ section {
 .title-number {
   font-size: 1.8rem;
   font-weight: 700;
+  color: var(--accent-cyan);
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   background-clip: text;
