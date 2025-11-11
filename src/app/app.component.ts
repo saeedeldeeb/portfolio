@@ -113,78 +113,110 @@ export class AppComponent implements OnInit, AfterViewInit {
   projects = [
     {
       name: 'ProSplit',
-      description: 'Buy now, Pay later - financing solution (BNPL)',
-      technologies: 'Worked on multiple services in a microservice architecture with .Net Aspire tool and K8s.'
+      description: 'Buy now, Pay later - financing solution (BNPL), Worked on multiple services in a microservice architecture with .Net Aspire tool and K8s.',
+      technologies: 'C# - .Net Core - Docker - k8s - Mapster - PostgreSQL - RabbitMQ - Redis - AliBaba Bucket - .Net Aspire - Seq - Azure DevOps',
+      company: 'Probuy',
+      links: [
+        { label: 'Website', url: 'https://probuy.me/' }
+      ]
     },
     {
       name: 'Tracking Service',
-      description: 'Vehicles Tracking service for Off Duty School Bus Project',
+      description: 'Real-time GPS tracking service for school buses utilizing WebSocket connections, message queues for reliable data processing, and Redis for fast location caching. Supports concurrent tracking of multiple vehicles with low latency.',
       technologies: 'C# - .Net Core - Docker - RabbitMQ - Redis - Multithreading - HTTP Client - Hosted Service',
-      link: 'GitRepo'
+      links: [
+        { label: 'GitHub', url: 'https://github.com/saeedeldeeb/tracking-service' }
+      ]
     },
     {
       name: 'Off Duty School Bus',
-      description: 'School bus rental system',
+      description: 'Comprehensive school bus rental platform enabling parents to book transportation services. Features multi-language support, role-based permissions, integrated payment processing via Stripe, and event-driven architecture using RabbitMQ for scalability.',
       technologies: 'C# - .Net Core - Docker - Clean Arch - Multilangual Entity - Permissions Based - AutoMapper - Stripe - RabbitMQ',
-      link: 'GitRepo'
+      links: [
+        { label: 'GitHub', url: 'https://github.com/saeedeldeeb/the-off-duty-school-bus' }
+      ]
     },
     {
       name: 'Wheel Wander',
-      description: 'Bike rental system',
+      description: 'Wheel Wander is a bike rental system developed using C# and JavaScript. The system allows users to rent bikes from various stations and return them when they\'re done. The system is managed by an admin who can add, update, and view details of System.',
       technologies: 'C# - JS - MVC Razor - UnitOfWork - Repository Pattern - Identity(Cookie, JWT) - Twilio SMS',
-      link: 'GitRepo'
+      links: [
+        { label: 'GitHub', url: 'https://github.com/saeedeldeeb/wheel-wander-.net' }
+      ]
     },
     {
       name: 'Ibn Khaldun International Schools',
       description: 'A large multi service educational platform for Ibn Khaldoun schools in Saudi Arabia',
       technologies: 'PHP - Golang - RabbitMQ - PostGIS - Docker - integeration Test - Load Test(k6)',
-      company: 'Our education for investment'
+      company: 'Our education for investment',
+      links: [
+        { label: 'Website', url: 'https://ouredu.net/en/' }
+      ]
     },
     {
       name: 'topqdrat',
-      description: 'E-Learning service',
+      description: 'E-learning platform for Saudi Arabian students preparing for standardized tests. Integrated local payment gateways (Moyasar, Hyperpay) and Apple in-app purchases to provide seamless payment experience across web and mobile platforms.',
       technologies: 'Implemented some local payment Gateways in Saudi Arabia and Apple in-app purchase',
-      company: 'Kite Agency'
+      company: 'Kite Agency',
+      links: [
+        { label: 'Website', url: 'https://topqdrat.com/ar' }
+      ]
     },
     {
       name: 'sadaqahti',
-      description: 'A charity website',
+      description: 'Digital charity platform connecting donors with charitable causes. Built with Laravel RESTful API supporting multiple languages (Arabic/English) and sophisticated role-based permission system for managing donations, campaigns, and beneficiaries.',
       technologies: 'Laravel Restful API, Multi-language, Roles and permissions',
       company: 'Majal',
-      link: 'Live demo'
+      links: [
+        { label: 'Live Demo', url: 'https://sadaqahti.com/en/' }
+      ]
     },
     {
       name: 'Ahadith API',
-      description: 'RESTful API powered by Express framework and SQLite',
-      link: 'GitRepo'
+      description: 'Open-source RESTful API providing access to authentic Islamic Hadith collections. Built with Express.js and SQLite for lightweight deployment, featuring efficient querying, categorization by books and narrators, and comprehensive documentation for developers.',
+      technologies: 'NodeJS (Express), SQLite',
+      links: [
+        { label: 'GitHub', url: 'https://github.com/saeedeldeeb/hadithApi' }
+      ]
     },
     {
       name: '302Labs',
-      description: 'Restful API for 302labs coworking space (Local web App)',
+      description: 'Backend API for coworking space management system handling member registrations, workspace bookings, and resource allocation. Built with Express.js and MongoDB for flexible data management and scalability.',
       technologies: 'NodeJS (Express), mongodb',
       company: 'Fahmawy',
-      link: 'GitRepo | App Screens'
+      links: [
+        { label: 'GitHub', url: 'https://github.com/saeedeldeeb/CoworkingSpace-Api' },
+        { label: 'App Screens', url: 'https://drive.google.com/file/d/18fimYHAffXmD6jWUdUQbGle5XpStgw0u/view' }
+      ]
     },
     {
       name: 'Hathaly',
-      description: 'A delivery Android App',
+      description: 'Android e-commerce delivery application integrated with WooCommerce backend. Implements MVP architecture pattern with Retrofit for network calls, providing customers with seamless product browsing, ordering, and real-time delivery tracking.',
       technologies: 'WooCommerce (Server Side), Retrofit, MVP',
       company: 'Fahmawy',
-      link: 'Play Store Link'
+      links: [
+        { label: 'Video', url: 'https://www.youtube.com/watch?v=f96Tq6Z365o' }
+      ]
     },
     {
       name: 'CoProfile',
-      description: 'Android application & Laravel api for companies\' services and projects',
+      description: 'Full-stack company portfolio solution featuring an Android app with MVVM architecture and a Laravel RESTful API backend. Enables companies to showcase their services, projects, and team members with dynamic content management.',
       technologies: 'Retrofit, MVVM',
       company: 'Fahmawy',
-      link: 'GitHub repo'
+      links: [
+        { label: 'GitHub', url: 'https://github.com/saeedeldeeb/CompanyProfile' }
+      ]
     },
     {
       name: 'Rakna System',
-      description: 'Graduation Project - A peer to peer parking system',
+      description: 'Graduation project: Peer-to-peer parking marketplace connecting car owners with garage owners. Dual mobile applications with real-time location services using Mapbox, Firebase notifications, and PHP backend for booking management and payment processing.',
       technologies: 'Native PHP, MySQL, Mapbox, Volley, Firebase',
-      note: '1st App (Car owner) & (Garage owner)',
-      link: 'video link | GitHub'
+      links: [
+        { label: 'Car Owner Video', url: 'https://www.youtube.com/watch?v=Mq_cRU_SezE' },
+        { label: 'Car Owner GitHub', url: 'https://github.com/Islam2ela4/Rakna_Car_Owner_App' },
+        { label: 'Garage Owner Video', url: 'https://www.youtube.com/watch?v=gmrvk2IWya8' },
+        { label: 'Garage Owner GitHub', url: 'https://github.com/Islam2ela4/Rakna_Garage_Owner_App'}
+      ]
     }
   ];
 
