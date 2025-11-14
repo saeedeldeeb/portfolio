@@ -3,12 +3,12 @@
   <div class="nav-container">
     <div class="nav-logo">{{ name }}</div>
     <ul class="nav-menu">
-      <li><a href="#home" class="nav-link">Home</a></li>
-      <li><a href="#about" class="nav-link">About</a></li>
-      <li><a href="#skills" class="nav-link">Skills</a></li>
-      <li><a href="#experience" class="nav-link">Experience</a></li>
-      <li><a href="#projects" class="nav-link">Projects</a></li>
-      <li><a href="#contact" class="nav-link">Contact</a></li>
+      <li><a href="#home" class="nav-link" [class.active]="isActive('home')">Home</a></li>
+      <li><a href="#about" class="nav-link" [class.active]="isActive('about')">About</a></li>
+      <li><a href="#skills" class="nav-link" [class.active]="isActive('skills')">Skills</a></li>
+      <li><a href="#experience" class="nav-link" [class.active]="isActive('experience')">Experience</a></li>
+      <li><a href="#projects" class="nav-link" [class.active]="isActive('projects')">Projects</a></li>
+      <li><a href="#contact" class="nav-link" [class.active]="isActive('contact')">Contact</a></li>
     </ul>
   </div>
 </nav>

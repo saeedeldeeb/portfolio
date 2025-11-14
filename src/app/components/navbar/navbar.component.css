@@ -66,6 +66,14 @@
   width: 100%;
 }
 
+.nav-link.active {
+  color: var(--accent-cyan);
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+
 /* ===== Responsive Design ===== */
 @media (max-width: 968px) {
   .nav-menu {
