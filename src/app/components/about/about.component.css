@@ -46,3 +46,10 @@
   color: var(--text-primary);
   font-size: 1rem;
 }
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}

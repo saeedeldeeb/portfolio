@@ -65,3 +65,33 @@
 .nav-link:hover::after {
   width: 100%;
 }
+
+/* ===== Responsive Design ===== */
+@media (max-width: 968px) {
+  .nav-menu {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 0 1rem;
+  }
+
+  .nav-logo {
+    font-size: 1.2rem;
+  }
+
+  .nav-menu {
+    gap: 0.5rem;
+    font-size: 0.8rem;
+  }
+}

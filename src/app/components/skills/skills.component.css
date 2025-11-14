@@ -58,3 +58,10 @@
   position: relative;
   z-index: 1;
 }
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}

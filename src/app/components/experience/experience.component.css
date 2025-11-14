@@ -116,3 +116,24 @@
   font-size: 1.2rem;
   line-height: 1.4;
 }
+
+/* ===== Responsive Design ===== */
+@media (max-width: 968px) {
+  .timeline::before {
+    left: 8px;
+  }
+
+  .timeline-item {
+    padding-left: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-header {
+    flex-direction: column;
+  }
+
+  .job-period {
+    align-self: flex-start;
+  }
+}
