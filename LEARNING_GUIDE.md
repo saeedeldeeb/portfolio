@@ -214,23 +214,292 @@ Data binding connects your component's TypeScript code with the HTML template.
 - With real resume data: 8.85 kB
 - Production builds are even smaller (optimized and minified)
 
+### TypeScript Interfaces
+- Define the "shape" of your data with type safety
+- Prevents errors by ensuring correct data structure
+- Makes your code more maintainable and self-documenting
+
+Example from resume.models.ts:54:
+```typescript
+export interface PersonalInfo {
+  name: string;
+  title: string;
+  email: string;
+  phone: string;
+  location: string;
+}
+```
+
+Benefits:
+- **Type Safety**: TypeScript will warn you if you try to use the wrong data type
+- **IntelliSense**: Your editor can provide autocomplete suggestions
+- **Documentation**: Other developers (and future you) know exactly what data is expected
+- **Refactoring**: Easier to change data structures across your app
+
+### Angular Services
+- Services provide a way to share data and logic across multiple components
+- Use the `@Injectable()` decorator to make a service available
+- `providedIn: 'root'` makes it a singleton (one instance for entire app)
+
+Example from resume-data.service.ts:7:
+```typescript
+@Injectable({
+  providedIn: 'root'
+})
+export class ResumeDataService {
+  getPersonalInfo(): PersonalInfo {
+    return this.resumeData.personalInfo;
+  }
+}
+```
+
+Why use services?
+- **Centralized Data**: All resume data in one place
+- **Reusability**: Multiple components can access the same data
+- **Separation of Concerns**: Components focus on UI, services handle data
+- **Testability**: Easier to test business logic separately
+
+### Dependency Injection
+- Angular's way of providing dependencies to components
+- Modern approach using the `inject()` function (Angular 14+)
+
+Example from app.component.ts:32:
+```typescript
+export class AppComponent {
+  private resumeDataService = inject(ResumeDataService);
+
+  ngOnInit(): void {
+    this.profile = this.resumeDataService.getProfile();
+  }
+}
+```
+
+What it does:
+- Angular automatically creates and provides the service instance
+- No need to manually create service objects
+- Makes code cleaner and easier to test
+
+### Component Communication with @Input()
+- `@Input()` decorator allows parent components to pass data to child components
+- Enables component reusability with different data
+
+Example from contact.component.ts:11-15:
+```typescript
+export class ContactComponent {
+  @Input() email: string = '';
+  @Input() phone: string = '';
+  @Input() linkedin: string = '';
+}
+```
+
+Usage in parent template:
+```html
+<app-contact
+  [email]="email"
+  [phone]="phone"
+  [linkedin]="linkedin">
+</app-contact>
+```
+
+Benefits:
+- **Reusable Components**: Same component, different data
+- **Clear Data Flow**: Parent → Child (top-down)
+- **Type Safety**: TypeScript ensures correct data types
+
+### Lifecycle Hooks
+- Special methods that Angular calls at specific moments in a component's lifecycle
+- Help you perform actions at the right time
+
+Common lifecycle hooks we used:
+
+**ngOnInit()** - app.component.ts:59
+- Called once when component is initialized
+- Perfect for fetching data and setting up initial state
+```typescript
+ngOnInit(): void {
+  const personalInfo = this.resumeDataService.getPersonalInfo();
+  this.name = personalInfo.name;
+}
+```
+
+**ngAfterViewInit()** - app.component.ts:78
+- Called after Angular initializes the component's views
+- Use for DOM manipulation or setting up third-party libraries
+```typescript
+ngAfterViewInit(): void {
+  this.setupScrollAnimations();
+}
+```
+
+**ngOnDestroy()**
+- Called just before Angular destroys the component
+- Use for cleanup (unsubscribe, clear timers, etc.)
+```typescript
+ngOnDestroy(): void {
+  // Cleanup code here
+}
+```
+
+### @HostListener Decorator
+- Listens to events on the host element or window
+- Great for handling scroll, resize, click events
+
+Example from navbar.component.ts:25-26:
+```typescript
+@HostListener('window:scroll')
+onScroll(): void {
+  const scrollPosition = window.pageYOffset + 100;
+  // Detect which section is in view
+}
+```
+
+Use cases:
+- Scroll detection for navbar highlighting
+- Window resize for responsive features
+- Click outside to close dropdowns
+
+### Intersection Observer API
+- Web API for detecting when elements enter/exit viewport
+- More performant than scroll event listeners
+- Used for scroll animations
+
+Example from app.component.ts:83-95:
+```typescript
+private setupScrollAnimations(): void {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  const fadeElements = document.querySelectorAll('.fade-in');
+  fadeElements.forEach(element => observer.observe(element));
+}
+```
+
+Benefits:
+- **Better Performance**: Only triggers when needed
+- **Smooth Animations**: Elements fade in as they scroll into view
+- **Modern Approach**: Native browser API
+
+### Standalone Components
+- Angular 17+ feature that simplifies component architecture
+- No need for NgModule declarations
+- Import dependencies directly in the component
+
+Example from contact.component.ts:3-8:
+```typescript
+@Component({
+  selector: 'app-contact',
+  standalone: true,
+  imports: [],
+  templateUrl: './contact.component.html',
+  styleUrl: './contact.component.css'
+})
+```
+
+Why use standalone components?
+- **Simpler**: Less boilerplate code
+- **Modern**: The future direction of Angular
+- **Clearer Dependencies**: See exactly what each component needs
+
+---
+
+## Creating Components with Angular CLI
+
+### The ng generate component Command
+
+```bash
+ng generate component components/navbar
+# or shorthand:
+ng g c components/navbar
+```
+
+**What this creates:**
+- `navbar.component.ts` - Component class with logic
+- `navbar.component.html` - Template (HTML)
+- `navbar.component.css` - Component-specific styles
+- `navbar.component.spec.ts` - Unit tests (optional)
+
+**What Angular does automatically:**
+- Creates the component folder
+- Sets up the `@Component` decorator
+- Creates a selector (e.g., `app-navbar`)
+- Makes it a standalone component (Angular 17+)
+
+### Components We Created
+
+1. **NavbarComponent** - Navigation with active section highlighting
+2. **HeroComponent** - Header section with name and title
+3. **AboutComponent** - Profile/about section
+4. **SkillsComponent** - Skills list
+5. **ExperienceComponent** - Work experience timeline
+6. **ProjectsComponent** - Portfolio projects
+7. **EducationComponent** - Education details
+8. **ContactComponent** - Contact information and social links
+9. **FooterComponent** - Footer with copyright
+
 ---
 
 ## What We Built
 
-### Simple Resume Structure
-We created a single-page resume with sections:
-- **Header** - Name and title
-- **About** - Brief introduction
-- **Skills** - List of skills
-- **Experience** - Job history
-- **Contact** - Contact information
+### Component-Based Resume Architecture
+We refactored our single-page resume into a modular, component-based structure:
 
-### Why We Removed Routing
-- Our resume is a single page, so we don't need multiple routes
-- Simpler code = easier to learn and maintain
-- Smaller bundle size = faster loading
-- We can always add it later if needed
+**Main Container** (app.component.ts:14-30)
+- Imports all child components
+- Manages data from ResumeDataService
+- Passes data to child components via @Input()
+
+**Data Layer**
+- `resume.models.ts` - TypeScript interfaces for type safety
+- `resume-data.service.ts` - Centralized data management
+
+**UI Components**
+- Each section is a separate, reusable component
+- Components receive data through @Input() properties
+- Responsive design with CSS Grid and Flexbox
+
+**Advanced Features**
+- Active section highlighting in navbar (scroll detection)
+- Smooth scroll animations using Intersection Observer
+- Responsive design for mobile, tablet, and desktop
+- Social media integration in contact section
+
+### Why Component Architecture?
+
+**Benefits we learned:**
+1. **Modularity**: Each component handles one responsibility
+2. **Reusability**: Components can be reused with different data
+3. **Maintainability**: Easier to find and fix issues
+4. **Scalability**: Easy to add new sections
+5. **Team Collaboration**: Multiple developers can work on different components
+6. **Testing**: Smaller units are easier to test
+
+### Project Structure After Refactoring
+
+```
+src/app/
+├── components/
+│   ├── navbar/           # Navigation with scroll detection
+│   ├── hero/             # Header/introduction
+│   ├── about/            # About/profile section
+│   ├── skills/           # Skills list
+│   ├── experience/       # Work experience
+│   ├── projects/         # Portfolio projects
+│   ├── education/        # Education details
+│   ├── contact/          # Contact information
+│   └── footer/           # Footer
+├── models/
+│   └── resume.models.ts  # TypeScript interfaces
+├── services/
+│   └── resume-data.service.ts  # Data management
+├── app.component.ts      # Main component (container)
+├── app.component.html    # Main template
+└── app.config.ts         # App configuration
+```
 
 ---
 
@@ -240,10 +509,50 @@ We created a single-page resume with sections:
 2. ✅ Remove unnecessary routing
 3. ✅ Set up basic resume structure
 4. ✅ Learn about data binding and displaying dynamic content
-5. ⏭️ Create additional components (breaking down the resume)
-6. ⏭️ Add TypeScript interfaces for type safety
-7. ⏭️ Learn about event binding and interactivity
+5. ✅ Create additional components (breaking down the resume)
+6. ✅ Add TypeScript interfaces for type safety
+7. ✅ Learn about Angular services and dependency injection
+8. ✅ Implement component communication with @Input()
+9. ✅ Add lifecycle hooks (ngOnInit, ngAfterViewInit)
+10. ✅ Implement scroll detection with @HostListener
+11. ✅ Add scroll animations with Intersection Observer
+12. ✅ Make it responsive for all screen sizes
+
+### Future Learning Opportunities
+
+13. 🔄 Add Angular Router for multi-page navigation
+14. 🔄 Implement @Output() for child-to-parent communication
+15. 🔄 Learn about Reactive Forms for contact form
+16. 🔄 Add HTTP Client for API integration
+17. 🔄 Learn about RxJS Observables
+18. 🔄 Deploy to production (GitHub Pages, Netlify, Vercel)
+19. 🔄 Add unit tests with Jasmine/Karma
+20. 🔄 Implement dark mode toggle
+21. 🔄 Add internationalization (i18n) for multiple languages
 
 ---
 
-*This guide will be updated as we progress through the learning journey!*
+## Key Takeaways
+
+### What Makes Angular Powerful?
+
+1. **TypeScript**: Type safety prevents bugs before runtime
+2. **Component Architecture**: Modular, reusable, maintainable code
+3. **Dependency Injection**: Clean, testable code structure
+4. **Data Binding**: Automatic UI updates when data changes
+5. **CLI Tools**: Automates repetitive tasks
+6. **Modern Features**: Standalone components, new control flow syntax
+
+### Best Practices We Followed
+
+1. ✅ **Separation of Concerns**: Data (service) separate from UI (components)
+2. ✅ **Type Safety**: Using interfaces for all data structures
+3. ✅ **Component Composition**: Small, focused components
+4. ✅ **Naming Conventions**: Clear, descriptive names
+5. ✅ **Responsive Design**: Mobile-first approach
+6. ✅ **Performance**: Intersection Observer instead of scroll events
+7. ✅ **Code Organization**: Logical folder structure
+
+---
+
+*This guide documents our complete Angular learning journey building a professional resume application!*
