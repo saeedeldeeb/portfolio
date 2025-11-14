@@ -98,27 +98,4 @@ export class AppComponent implements OnInit, AfterViewInit {
     const fadeElements = document.querySelectorAll('.fade-in');
     fadeElements.forEach(element => observer.observe(element));
   }
-
-  onSubmitContact(event: Event): void {
-    event.preventDefault();
-
-    const form = event.target as HTMLFormElement;
-    const formData = new FormData(form);
-
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      subject: formData.get('subject'),
-      message: formData.get('message')
-    };
-
-    // Log form data (in production, you would send this to a backend)
-    console.log('Contact form submitted:', data);
-
-    // Show success message
-    alert('Thank you for your message! I will get back to you soon.');
-
-    // Reset form
-    form.reset();
-  }
 }

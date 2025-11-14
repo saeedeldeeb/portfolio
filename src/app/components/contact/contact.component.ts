@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-contact',
@@ -11,9 +11,6 @@ export class ContactComponent {
   @Input() email: string = '';
   @Input() phone: string = '';
   @Input() location: string = '';
-  @Output() contactSubmit = new EventEmitter<Event>();
-
-  onSubmit(event: Event) {
-    this.contactSubmit.emit(event);
-  }
+  @Input() linkedin: string = '';
+  @Input() github: string = '';
 }

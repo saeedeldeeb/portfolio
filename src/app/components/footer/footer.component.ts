@@ -9,6 +9,4 @@ import { Component, Input } from '@angular/core';
 })
 export class FooterComponent {
   @Input() name: string = '';
-  @Input() github: string = '';
-  @Input() linkedin: string = '';
 }
